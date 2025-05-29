@@ -18,6 +18,4 @@ public class GlobalExceptionHandler {
             errors.put(error.getField(), error.getDefaultMessage()));
         return ResponseEntity.badRequest().body(errors);
     }
-
-    // Можно добавить и другие обработчики: EntityNotFoundException, CustomBusinessException и т.д.
 }

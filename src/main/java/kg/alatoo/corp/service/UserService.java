@@ -9,4 +9,5 @@ public interface UserService {
     List<UserDto> getAllUsers();
     UserDto updateUser(long id, UserDto userDto);
     void deleteUser(long id);
+    boolean existsById(long id);
 }

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat by ID</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: Arial, sans-serif; background: #f7f7f7; }
+        .main-layout { display: flex; justify-content: center; margin-top: 40px; }
+        .users-list { width: 160px; background: #fafafa; border-radius: 10px 0 0 10px; box-shadow: 0 4px 24px #0001; padding: 12px; }
+        .users-list h3 { margin: 0 0 10px 0; }
+        .user-item { padding: 7px 8px; border-radius: 5px; margin-bottom: 4px; cursor: pointer; transition: background 0.2s;}
+        .user-item:hover { background: #e3f3ff; }
+        .user-item.selected { background: #b3e6ff; font-weight: bold; }
+        .container { width: 360px; background: #fff; border-radius: 0 10px 10px 0; box-shadow: 0 4px 24px #0001; padding: 24px; }
+        .login, .chat { display: flex; flex-direction: column; gap: 12px; }
+        .header { display: flex; gap: 8px; align-items: center; }
+        .messages { height: 240px; overflow-y: auto; background: #f0f0f0; padding: 10px; border-radius: 8px; margin-bottom: 10px; }
+        .message-row { margin-bottom: 8px; display: flex; }
+        .message-row.self { justify-content: flex-end; }
+        .bubble { background: #e2f7cb; padding: 7px 14px; border-radius: 15px; display: inline-block; max-width: 70%; }
+        .message-row.self .bubble { background: #cbe5ff; }
+        .meta { display: block; font-size: 10px; color: #7b7b7b; margin-top: 2px; }
+        .footer { display: flex; gap: 8px; }
+        input, button { padding: 7px; border-radius: 5px; border: 1px solid #ddd; }
+        button { background: #4caf50; color: #fff; border: none; cursor: pointer; }
+        button:hover { background: #388e3c; }
+    </style>
+</head>
+<body>
+<div class="main-layout">
+    <div class="users-list" id="usersListBox" style="display:none;">
+        <h3>Пользователи</h3>
+        <div id="usersList"></div>
+    </div>
+    <div class="container">
+        <div class="login" id="loginBox">
+            <h2>Вход</h2>
+            <input id="loginUserId" type="number" min="1" placeholder="Ваш ID">
+            <button onclick="login()">Войти</button>
+        </div>
+        <div class="chat" id="chatBox" style="display:none;">
+            <div class="header">
+                <span id="currentUser"></span>
+                <input id="receiver" type="number" min="1" placeholder="ID получателя">
+            </div>
+            <div class="messages" id="messages"></div>
+            <div class="footer">
+                <input id="messageInput" type="text" placeholder="Введите сообщение..." autocomplete="off">
+                <button onclick="sendMessage()">Отправить</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
